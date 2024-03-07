@@ -25,7 +25,7 @@ def extract_bayer_channels(raw):
 
     RAW_combined = np.dstack((ch_B, ch_Gb, ch_R, ch_Gr))
     RAW_norm = RAW_combined.astype(np.float32) / (4 * 255)
-    print(RAW_norm.shape)
+    #print(RAW_norm.shape)
     
     return RAW_norm
 
@@ -35,12 +35,12 @@ class LoadData(Dataset):
     def __init__(self, dataset_dir, dataset_size, dslr_scale, test=False):
 
         if test:
-            self.raw_dir = os.path.join(dataset_dir, 'test', 'raw')
-            self.dslr_dir = os.path.join(dataset_dir, 'test', 'jpg_img')
+            self.raw_dir = os.path.join(dataset_dir, 'test', 'huawei_raw')
+            self.dslr_dir = os.path.join(dataset_dir, 'test', 'canon')
             self.dataset_size = dataset_size
         else:
-            self.raw_dir = os.path.join(dataset_dir, 'train', 'pynet_fullres_cropped_raw')
-            self.dslr_dir = os.path.join(dataset_dir, 'train', 'pynet_fullres_cropped_jpg')
+            self.raw_dir = os.path.join(dataset_dir, 'train', 'huawei_raw')
+            self.dslr_dir = os.path.join(dataset_dir, 'train', 'canon')
 
         self.dataset_size = dataset_size
         self.scale = dslr_scale
@@ -73,7 +73,7 @@ class LoadData(Dataset):
 class LoadVisualData(Dataset):
 
     def __init__(self, data_dir, size, scale, level, full_resolution=True):
-        self.raw_dir = os.path.join(data_dir,'test','full_resolution')
+        self.raw_dir = os.path.join(data_dir,'test','huawei_full_resolution')
         #self.raw_dir = data_dir
         print("raw_dir: ",self.raw_dir)
 
